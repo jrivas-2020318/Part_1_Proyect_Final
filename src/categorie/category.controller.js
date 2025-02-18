@@ -85,7 +85,6 @@ export const get = async (req, res) => {
     }
 }
 
-
 export const update = async (req, res) => {
     const { id } = req.params
     const data = req.body
@@ -110,49 +109,26 @@ export const update = async (req, res) => {
     }
 }
 
-
-
-// Eliminar una categoría y reasignar productos a la categoría predeterminada
 export const deleteCategory = async (req, res) => {
     const { id } = req.params
+
     try {
-        const category = await Category.findById(id)
-
-        if (!category) {
-            return res.status(404).send({
-                success: false,
-                message: "Category not found."
-            })
-        }
-
-        // Evitar eliminar la categoría predeterminada
-        if (category.isDefault) {
-            return res.status(403).send({
-                success: false,
-                message: "You cannot delete the default category."
-            })
-        }
-        let defaultCategory = await Category.findOne({ isDefault: true })
+        const defaultCategory = await Category.findOne({ isDefault: true })
         if (!defaultCategory) {
-            defaultCategory = await Category.create({ name: "No category.", isDefault: true })
-            console.log("✅ Default category created successfully.")
+            return res.status(500).send({ success: false, message: "Error: Categoría predeterminada no encontrada" })
         }
-
-        // Reasignar productos a la categoría predeterminada
+        if (id === defaultCategory._id.toString()) {
+            return res.status(400).send({ success: false, message: "No se puede eliminar la categoría predeterminada" })
+        }
+        const category = await Category.findById(id)
+        if (!category) {
+            return res.status(404).send({ success: false, message: "Categoría no encontrada" })
+        }
         await Product.updateMany({ category: id }, { category: defaultCategory._id })
         await Category.findByIdAndDelete(id)
-
-        return res.send({
-            success: true,
-            message: "Category deleted and products reassigned to the default one."
-        })
+        return res.send({ success: true, message: "Categoría eliminada y productos reasignados a la categoría predeterminada" })
     } catch (err) {
         console.error(err)
-        return res.status(500).send({
-            success: false,
-            message: "Error deleting category.",
-            err
-        })
+        return res.status(500).send({ success: false, message: "Error al eliminar la categoría", err })
     }
 }
-

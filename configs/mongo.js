@@ -1,4 +1,5 @@
 import mongoose, {disconnect} from "mongoose"
+import Category from "../src/categorie/category.model.js"
 
 export const connect = async()=>{
     try{
@@ -8,8 +9,9 @@ export const connect = async()=>{
         mongoose.connection.on('connecting', ()=>{
             console.log('MongoDB | try conecting')
         })
-        mongoose.connection.on('connected', ()=>{
+        mongoose.connection.on('connected', async()=>{
             console.log('MongoDB | connected to mongodb')
+            await createDefaultCategory()
         })
         mongoose.connection.once('open', ()=>{
             console.log('MongoDB | connected to database')
@@ -29,5 +31,24 @@ export const connect = async()=>{
         )
     }catch(err){
         console.error('Database connection failed', err)
+    }
+}
+
+const createDefaultCategory = async () => {
+    try {
+        const defaultCategory = await Category.findOne({ isDefault: true })
+        if (!defaultCategory) {
+            const newCategory = new Category({ 
+                name: "Sin categoría", 
+                description: "Productos sin categoría", 
+                isDefault: true 
+            })
+            await newCategory.save()
+            console.log("✅ Categoría predeterminada creada")
+        } else {
+            console.log("✅ Categoría predeterminada ya existe")
+        }
+    } catch (err) {
+        console.error("Error al crear la categoría predeterminada:", err)
     }
 }
