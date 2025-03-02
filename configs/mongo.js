@@ -1,5 +1,6 @@
 import mongoose, {disconnect} from "mongoose"
 import Category from "../src/categorie/category.model.js"
+import User from "../src/user/user.model.js"
 
 export const connect = async()=>{
     try{
@@ -12,6 +13,7 @@ export const connect = async()=>{
         mongoose.connection.on('connected', async()=>{
             console.log('MongoDB | connected to mongodb')
             await createDefaultCategory()
+            await createDefaultAdmin()
         })
         mongoose.connection.once('open', ()=>{
             console.log('MongoDB | connected to database')
@@ -50,5 +52,30 @@ const createDefaultCategory = async () => {
         }
     } catch (err) {
         console.error("Error al crear la categoría predeterminada:", err)
+    }
+}
+
+const createDefaultAdmin = async () => {
+    try {
+        const adminExists = await User.findOne({ role: 'ADMIN' })
+        if (adminExists) {
+            console.log('✅ Admin account already exists.')
+            return;
+        }
+        const hashedPassword = await argon2.hash('J0s3Jul1@n11')
+        const newAdmin = new User({
+            username: 'admin',
+            email: 'admin@gmail.com',
+            password: hashedPassword,
+            name: 'Admin',
+            lastname: 'User',
+            phone: '1234567890',
+            role: 'ADMIN'
+        });
+
+        await newAdmin.save();
+        console.log('✅ Admin account created successfully.')
+    } catch (error) {
+        console.error('❌ Failed to create admin account:', error)
     }
 }
