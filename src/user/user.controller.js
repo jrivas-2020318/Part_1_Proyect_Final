@@ -87,33 +87,27 @@ export const deleteUser = async (req, res) => {
 
 export const deleteMyUser = async (req, res) => {
     try {
-        console.log("Usuario autenticado:", req.user)
-        const userUid = req.user._id
-        const user = await User.findOne({ uid: userUid })
-
-        if (!user) {
-            return res.status(404).send({ 
-                success: false, 
-                message: "User not found" 
-            })
+        if (!req.user || !req.user.uid) {
+            return res.status(401).send({ success: false, message: "Unauthorized: Token required" })
         }
-        user.status = false; 
-        await user.save()
+        const userUid = req.user.uid
 
-        return res.send({ 
-            success: true, 
-            message: "User deactivated successfully" 
-        })
+        const user = await User.findById(userUid);
+        if (!user) {
+            return res.status(404).send({ success: false, message: "User not found" })
+        }
+
+        user.status = false; 
+        await user.save();
+
+        return res.send({ success: true, message: "User deactivated successfully" })
 
     } catch (error) {
         console.error("Error deactivating user:", error)
-        res.status(500).send({ 
-            success: false, 
-            message: "General Error", 
-            error: error.message 
-        })
+        res.status(500).send({ success: false, message: "General Error", error: error.message })
     }
 }
+
 
 
 
