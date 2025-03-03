@@ -1,20 +1,19 @@
 'use strict'
-
-import {hash, verify} from 'argon2'
+import { hash, verify } from 'argon2'
 
 export const encrypt = async(password)=>{
-    try{
+    try {
         return await hash(password)
-    }catch(err){
+    } catch (err) {
         console.error(err)
         return err
     }
 }
 
-export const checkPassword = async(hash, password)=>{
-    try{
+export const checkPassword = async (hash, password) => {
+    try {
         return await verify(hash, password)
-    }catch(err){
+    } catch (err) {
         console.error(err)
         return err
     }
