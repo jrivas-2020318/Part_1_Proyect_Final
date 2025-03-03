@@ -1,4 +1,5 @@
 import User from "./user.model.js"
+import {checkPassword } from "../../utils/encrypt.js"
 
 export const getAll = async (req, res) => {
     try {
@@ -84,26 +85,36 @@ export const deleteUser = async (req, res) => {
     }
 }
 
-
 export const deleteMyUser = async (req, res) => {
     try {
+        console.log("Authenticated User:", req.user)
+
         if (!req.user || !req.user.uid) {
             return res.status(401).send({ success: false, message: "Unauthorized: Token required" })
         }
-        const userUid = req.user.uid
 
-        const user = await User.findById(userUid);
+        const userId = req.user.uid
+        const { password } = req.body
+
+        if (!password) {
+            return res.status(400).send({ success: false, message: "Password is required to delete account" })
+        }
+        const user = await User.findById(userId).select("+password")
         if (!user) {
             return res.status(404).send({ success: false, message: "User not found" })
         }
 
-        user.status = false; 
-        await user.save();
+        if (await checkPassword(user.password, password)) {
+            user.status = false
+            await user.save()
 
-        return res.send({ success: true, message: "User deactivated successfully" })
+            return res.send({ success: true, message: "User deactivated successfully" })
+        } else {
+            return res.status(403).send({ success: false, message: "Incorrect password" })
+        }
 
     } catch (error) {
-        console.error("Error deactivating user:", error)
+        console.error("Error deactivating user:", error);
         res.status(500).send({ success: false, message: "General Error", error: error.message })
     }
 }
