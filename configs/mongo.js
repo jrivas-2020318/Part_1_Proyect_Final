@@ -1,5 +1,6 @@
 import mongoose, {disconnect} from "mongoose"
 import Category from "../src/categorie/category.model.js"
+import argon2  from "argon2"
 import User from "../src/user/user.model.js"
 
 export const connect = async()=>{
@@ -38,20 +39,25 @@ export const connect = async()=>{
 
 const createDefaultCategory = async () => {
     try {
-        const defaultCategory = await Category.findOne({ isDefault: true })
-        if (!defaultCategory) {
-            const newCategory = new Category({ 
-                name: "Sin categoría", 
-                description: "Productos sin categoría", 
-                isDefault: true 
-            })
-            await newCategory.save()
-            console.log("✅ Categoría predeterminada creada")
-        } else {
+        const defaultCategoryExists = await Category.findOne({ 
+            $or: [{ isDefault: true }, { name: "Sin categoría" }]
+        });
+
+        if (defaultCategoryExists) {
             console.log("✅ Categoría predeterminada ya existe")
+            return;
         }
+        const newCategory = new Category({ 
+            name: "Sin categoría", 
+            description: "Productos sin categoría", 
+            isDefault: true 
+        });
+
+        await newCategory.save()
+        console.log("✅ Categoría predeterminada creada")
+
     } catch (err) {
-        console.error("Error al crear la categoría predeterminada:", err)
+        console.error("❌ Error al crear la categoría predeterminada:", err)
     }
 }
 
