@@ -1,6 +1,5 @@
 import User from "./user.model.js"
 
-// Obtener todos los usuarios (solo admin)
 export const getAll = async (req, res) => {
     try {
         
@@ -17,28 +16,23 @@ export const getAll = async (req, res) => {
 
 export const get = async (req, res) => {
     try {
-        // Verificar si el usuario está autenticado y tiene un ID válido
-        if (!req.user || !req.user.id) {
-            return res.status(401).send({ success: false, message: "Unauthorized: Token required" })
+        const user = await User.findById(req.user.uid).select('-password')
+        if (!user) {
+            return res.status(404).send({message: 'User not found'})
         }
-        const { id } = req.params
-        if (req.user.id !== id) {
-            return res.status(403).send({ success: false, message: "You can only view your own profile" })
-        }
-        const user = await User.findById(id)
-        if (!user) return res.status(404).send({ success: false, message: "User not found." })
-
-        return res.send({ success: true, message: "User not found", user })
-    } catch (err) {
-        console.error(err)
-        return res.status(500).send({ success: false, message: "Error retrieving user.", err })
+        return res.send(user)
+    } catch (error) {
+        console.error('Error retrieving user user:', error)
+        return res.status(500).send( {success: false,message: 'General Error'})
     }
 }
+
+
+
 
 export const save = async (req, res) => {
     const data = req.body
     try {
-        // Verificar si el usuario o email ya existen
         const existingUser = await User.findOne({ $or: [{ username: data.username }, { email: data.email }] })
         if (existingUser) {
             return res.status(400).send({ success: false, message: "The username or email is already registered." })
@@ -53,27 +47,26 @@ export const save = async (req, res) => {
     }
 }
 
-export const update = async (req, res) => {
-    const { id } = req.params
-    const data = req.body
+export const update = async(req,res)=>{
+    try{
+        const id = req.user.uid
+        const newdata = req.body
+        if(newdata.password){
+            return res.send({message: 'cannot update your password'})
+            
+        }
+        const data = await User.findByIdAndUpdate(id,newdata,{ new: true })
 
-    try {
-        if (!req.user || !req.user.id) {
-            return res.status(401).send({ success: false, message: "Unauthorized: Token required" })
-        }
-        if (req.user.id !== id) {
-            return res.status(403).send({ success: false, message: "You can only update your own profile" })
-        }
-        const updatedUser = await User.findByIdAndUpdate(id, data, { new: true })
-        if (!updatedUser) {
-            return res.status(404).send({ success: false, message: "Usuario no encontrado, no actualizado" })
-        }
-        return res.send({ success: true, message: "Usuario actualizado correctamente", updatedUser })
-    } catch (err) {
+        if(!data) return res.status(404).send({succes: false, message: 'User not foudn'})
+            return res.send({
+        succes: true,
+        message: 'user updated', data})
+    }catch(err){
         console.error(err)
-        return res.status(500).send({ success: false, message: "Error al actualizar usuario", err })
+        return res.status(500).send({message: 'General error with updating an user', err})
     }
 }
+
 
 export const deleteUser = async (req, res) => {
     try {
@@ -90,6 +83,42 @@ export const deleteUser = async (req, res) => {
         return res.status(500).send({ success: false, message: "General Error" })
     }
 }
+
+
+export const deleteMyUser = async (req, res) => {
+    try {
+        console.log("Usuario autenticado:", req.user)
+        const userUid = req.user._id
+        const user = await User.findOne({ uid: userUid })
+
+        if (!user) {
+            return res.status(404).send({ 
+                success: false, 
+                message: "User not found" 
+            })
+        }
+        user.status = false; 
+        await user.save()
+
+        return res.send({ 
+            success: true, 
+            message: "User deactivated successfully" 
+        })
+
+    } catch (error) {
+        console.error("Error deactivating user:", error)
+        res.status(500).send({ 
+            success: false, 
+            message: "General Error", 
+            error: error.message 
+        })
+    }
+}
+
+
+
+
+
 
 
 
