@@ -60,26 +60,19 @@ export const deleteProductCart = async (req, res) => {
         if (!idProduct) {
             return res.status(400).send({ message: 'Please provide product ID' })
         }
-
-        // Buscar el carrito del usuario
         let cart = await Cart.findOne({ user: idUser })
 
         if (!cart) {
             return res.status(404).send({ message: 'Cart not found for this user' })
         }
-
-        // Buscar el producto en el carrito
         const existingProductIndex = cart.products.findIndex(p => p.product.toString() === idProduct)
 
         if (existingProductIndex === -1) {
             return res.status(400).send({ message: 'Product not found in cart' })
         }
 
-        // Eliminar el producto del carrito
         cart.products.splice(existingProductIndex, 1)
         console.log('Product removed from cart')
-
-        // Recalcular el total del carrito
         let total = 0;
         for (const item of cart.products) {
             const productDetails = await Product.findById(item.product)
