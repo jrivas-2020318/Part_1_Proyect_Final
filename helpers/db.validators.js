@@ -17,8 +17,11 @@ export const existEmail = async (email) => {
     }
 }
 
-export const objectIdValid = async(objectId)=>{
-    if(!isValidObjectId(objectId)){
-        throw new Error(`Keeper is not objectId valid`)
+
+export const existUserById = async (uid) => {
+    const user = await User.findById(uid)
+    if (!user) {
+        return false
     }
+    return true
 }
