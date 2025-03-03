@@ -39,7 +39,7 @@
 								},
 								{
 									"key": "password",
-									"value": "Jose@11@11",
+									"value": "Josejulian@11",
 									"type": "text"
 								},
 								{
@@ -76,6 +76,13 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -85,17 +92,19 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "username",
+									"key": "userLoggin",
 									"value": "jrivas",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "password",
 									"value": "Jose@11@11",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
-									"key": "username",
+									"key": "userLoggin",
 									"value": "dreyes",
 									"type": "text",
 									"disabled": true
@@ -107,7 +116,7 @@
 									"disabled": true
 								},
 								{
-									"key": "username",
+									"key": "userLoggin",
 									"value": "rgalindo",
 									"type": "text",
 									"disabled": true
@@ -117,6 +126,16 @@
 									"value": "Rgalindo11@11",
 									"type": "text",
 									"disabled": true
+								},
+								{
+									"key": "userLoggin",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "J0s3Jul1@n11",
+									"type": "text"
 								}
 							]
 						},
@@ -364,7 +383,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3700/v1/user/67b248bcce45c3e6971de820",
+							"raw": "http://localhost:3700/v1/user/my",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -373,7 +392,7 @@
 							"path": [
 								"v1",
 								"user",
-								"67b248bcce45c3e6971de820"
+								"my"
 							]
 						}
 					},
@@ -412,7 +431,7 @@
 								},
 								{
 									"key": "lastname",
-									"value": "Reyes Revolorio",
+									"value": "Reyes Revolori",
 									"type": "text"
 								},
 								{
@@ -428,7 +447,8 @@
 								{
 									"key": "password",
 									"value": "Diegoreyes@11@",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "phone",
@@ -443,7 +463,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3700/v1/user/67b248bcce45c3e6971de820",
+							"raw": "http://localhost:3700/v1/user/sdsd",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -452,7 +472,7 @@
 							"path": [
 								"v1",
 								"user",
-								"67b248bcce45c3e6971de820"
+								"sdsd"
 							]
 						}
 					},
@@ -507,6 +527,56 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delate my User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3700/v1/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3700",
+							"path": [
+								"v1",
+								"user",
+								""
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "Diegoreyes@11@",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -529,13 +599,7 @@
 						],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "name ",
-									"value": "Carnes",
-									"type": "text"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
 							"raw": "http://localhost:3700/v1/category/",
@@ -609,7 +673,7 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Vegetales",
+									"value": "Frutas",
 									"type": "text"
 								}
 							]
@@ -751,7 +815,7 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Fresas",
+									"value": "Durazno",
 									"type": "text"
 								},
 								{
@@ -766,7 +830,7 @@
 								},
 								{
 									"key": "category",
-									"value": "67b251eb4e72f045eaec7388",
+									"value": "67c5450c989e2fa052190356",
 									"type": "text"
 								},
 								{
@@ -846,7 +910,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3700/v1/product/67b2670d7adc2379d8e72120",
+							"raw": "http://localhost:3700/v1/product/updateProduct/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -855,7 +919,8 @@
 							"path": [
 								"v1",
 								"product",
-								"67b2670d7adc2379d8e72120"
+								"updateProduct",
+								""
 							]
 						}
 					},
@@ -990,7 +1055,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3700/v1/product/67b2670d7adc2379d8e72120",
+							"raw": "http://localhost:3700/v1/product/67c3f94c745dc05fa33d20fd",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -999,7 +1064,99 @@
 							"path": [
 								"v1",
 								"product",
-								"67b2670d7adc2379d8e72120"
+								"67c3f94c745dc05fa33d20fd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Stock",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3700/v1/product/stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3700",
+							"path": [
+								"v1",
+								"product",
+								"stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Stock Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3700/v1/product/sellProduct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3700",
+							"path": [
+								"v1",
+								"product",
+								"sellProduct"
 							]
 						}
 					},
@@ -1041,6 +1198,326 @@
 								"",
 								"delete",
 								"67ad4ce9f38efd833878d5e6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Create Cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "product",
+									"value": "67c5451c989e2fa052190359",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "total",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3700/v1/cart/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3700",
+							"path": [
+								"v1",
+								"cart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cart",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "product",
+									"value": "67c3f94c745dc05fa33d20fd",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "quantity",
+									"value": "3",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "67b248bcce45c3e6971de820",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3700/v1/cart/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3700",
+							"path": [
+								"v1",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product Cart",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "product",
+									"value": "67c3f945745dc05fa33d20fb",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "quantity",
+									"value": "0",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3700/v1/cart/delete/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3700",
+							"path": [
+								"v1",
+								"cart",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clean Cart User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "product",
+									"value": "67c3f945745dc05fa33d20fb",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "0",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3700/v1/cart/clear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3700",
+							"path": [
+								"v1",
+								"cart",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Facture",
+			"item": [
+				{
+					"name": "Facture",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3700/v1/facture/addfacture",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3700",
+							"path": [
+								"v1",
+								"facture",
+								"addfacture"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Facture",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "Canceled",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3700/v1/facture/updatefacture/67c507d37767a1d8e48bb734",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3700",
+							"path": [
+								"v1",
+								"facture",
+								"updatefacture",
+								"67c507d37767a1d8e48bb734"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Facture all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3700/v1/facture/getall",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3700",
+							"path": [
+								"v1",
+								"facture",
+								"getall"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},
