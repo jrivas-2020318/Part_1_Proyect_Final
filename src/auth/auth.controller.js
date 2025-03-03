@@ -3,7 +3,6 @@ import User from "../user/user.model.js";
 import { checkPassword, encrypt } from "../../utils/encrypt.js";
 import { generateJwt } from "../../utils/jwt.js";
 
-//Registar
 export const register = async(req, res)=>{
     try{
         let data = req.body
@@ -24,28 +23,59 @@ export const register = async(req, res)=>{
     }
 }
 
-export const login = async(req, res)=>{
+export const login = async (req, res) => {
     try {
-        let { username, password } = req.body;
-        let user = await User.findOne({ username });
-
-        if (user && await checkPassword(user.password, password)) {
-            let loggedUser = { 
-                id: user._id, 
-                name: user.name,
-                username: user.username,
-                role: user.role
-            };
-            let token = await generateJwt(loggedUser);
-            return res.send({
-                message: `W elcome ${user.name}`,
+        let { userLoggin, password } = req.body;
+        let user = await User.findOne({
+                $or: [
+                    { email: userLoggin },
+                    { username: userLoggin }
+                ]
+            }
+        )
+        if (!user) {
+                return res.status(400).send({
+                    success: false,
+                    message: 'Wrong email or password'
+                }
+            )
+        }
+        if (!user.status) {
+                return res.status(400).send({
+                    success: false,
+                    message: 'User account is not active. Please contact support.'
+                }
+            )
+        }
+        const isPasswordValid = await checkPassword(user.password, password);
+            if (!isPasswordValid) {
+                return res.status(400).send({
+                    success: false,
+                    message: 'Wrong email or password'
+                }
+            )
+        }
+        let loggedUser = {
+            uid: user._id,
+            name: user.name,
+            username: user.username,
+            role: user.role
+        }
+        let token = await generateJwt(loggedUser);
+        return res.send({
+                success: true,
+                message: `Welcome ${user.name}`,
                 loggedUser,
                 token
-            });
-        }
-        return res.status(400).send({ message: 'Wrong email or password' });
+            }
+        )
     } catch (err) {
-        console.error(err);
-        return res.status(500).send({ message: 'General error with login function' });
+            console.error('Error in login function:', err)
+            return res.status(500).send({
+                success: false,
+                message: 'General error with login function',
+                error: err.message
+            }
+        )
     }
 }
