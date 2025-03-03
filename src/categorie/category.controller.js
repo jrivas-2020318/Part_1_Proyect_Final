@@ -1,15 +1,9 @@
 import Category from "../categorie/category.model.js"
 import Product from "../product/product.model.js"
 
-
-export const test = (req, res) => {
-    return res.send({ message: 'Todo good' })
-}
-
 export const save = async (req, res) => {
     const data = req.body
     try {
-        // Verificar si el nombre de la categoría está presente
         if (!data.name || data.name.trim() === "") {
             return res.status(400).send({
                 success: false,
@@ -32,8 +26,6 @@ export const save = async (req, res) => {
         })
     }
 }
-
-
 
 export const getAll = async (req, res) => {
     const { limit, skip } = req.query
