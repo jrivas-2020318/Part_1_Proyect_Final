@@ -1,0 +1,1161 @@
+{
+	"info": {
+		"_postman_id": "cc40d4f8-d639-4870-9dfe-15325dc69251",
+		"name": "ProyectoFinal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37951878"
+	},
+	"item": [
+		{
+			"name": "AdminFuctions",
+			"item": [
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "udpdateProduct",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "id",
+											"value": "67c1c71b1a7865e367afa6f6",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Pan frances",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "pan frances recien horneado",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "3",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/product/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"product",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addProduct",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Pan manteca",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Pan Rico",
+											"type": "text"
+										},
+										{
+											"key": "stock",
+											"value": "20",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "67c1c6c06f0b4b9e57758298",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/product/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"product",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteProduct",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "id",
+											"value": "67c1c71b1a7865e367afa6f6",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/product/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"product",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "allProducts",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3628/v1/product/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"product",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ceroStock",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3628/v1/product/cero",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"product",
+										"cero"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findProduct",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "frances",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "67c37e793611e648ed6ca137",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/product/fp",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"product",
+										"fp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "mostselledProducts",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3628/v1/product/mostselledProducts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"product",
+										"mostselledProducts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "addCategory",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Pan",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Pan chido aca",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/category/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"category",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "allCategorys",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3628/v1/category/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"category",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updatecategory",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "id",
+											"value": "67c379287f1fb0f54c1df5f7",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Pan delicioso",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/category/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"category",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteCategory",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "id",
+											"value": "67c379287f1fb0f54c1df5f7",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/category/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"category",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "addUser",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Pablo",
+											"type": "text"
+										},
+										{
+											"key": "surname",
+											"value": "Realiquez",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "prealiquez",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "prealiquez-2022433@kinal.edu.gt",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Realiquez-15.!",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "36124296",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "ADMIN",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateUser",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "id",
+											"value": "67c379307f1fb0f54c1df5fb",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Pedro",
+											"type": "text"
+										},
+										{
+											"key": "surname",
+											"value": "Realiquez",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "username",
+											"value": "prealiquez",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "prealiquez-2022433@kinal.edu.gt",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "Realiquez-15.!",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "phone",
+											"value": "36124296",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "role",
+											"value": "ADMIN",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleterUser",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "id",
+											"value": "67c379307f1fb0f54c1df5fb",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Pedro",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "surname",
+											"value": "Realiquez",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "username",
+											"value": "prealiquez",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "prealiquez-2022433@kinal.edu.gt",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "Realiquez-15.!",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "phone",
+											"value": "36124296",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "role",
+											"value": "ADMIN",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/user/D",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"user",
+										"D"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "allUsers",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Facture",
+					"item": [
+						{
+							"name": "GetFacutura",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/facture",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"facture"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Historia",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3628/v1/facture/historial",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3628",
+									"path": [
+										"v1",
+										"facture",
+										"historial"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "myCart",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3628/v1/cart/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3628",
+							"path": [
+								"v1",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addProductToCart",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "product",
+									"value": "67c37f513611e648ed6ca146",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3628/v1/cart/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3628",
+							"path": [
+								"v1",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AllProducts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3628/v1/product/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3628",
+							"path": [
+								"v1",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOwnUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "password",
+									"value": "Pirir-15.!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3628/v1/user/ownUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3628",
+							"path": [
+								"v1",
+								"user",
+								"ownUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProfile",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Pedro",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Realiquez",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "prealiquez",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "prealiquez-2022433@kinal.edu.gt",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "Realiquez-15.!",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": "36124296",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3628/v1/user/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3628",
+							"path": [
+								"v1",
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Jose",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Pirir",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "jpirir",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "jpirir-2022433@kinal.edu.gt",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Pirir-15.!",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "36124296",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "CLIENT",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3628/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3628",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"token\",data.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "jpirir",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Pirir-15.!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3628/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3628",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
