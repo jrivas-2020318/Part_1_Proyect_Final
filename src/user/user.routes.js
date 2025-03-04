@@ -10,7 +10,7 @@ api.get('/', [validateJwt, isAdmin], getAll)
 api.delete('/myUser', [validateJwt, deleteMyUser], deleteMyUser)
 api.get('/my', [validateJwt], get)
 api.post('/createAdmin', [validateJwt, createAdminValidator, isAdmin], save)
-api.put('/:id', [validateJwt, updateValidator], update)
+api.put('/update', [validateJwt, updateValidator], update)
 api.delete('/:id', [validateJwt, validateDeletePermission, isAdmin], deleteUser)
 
 export default api

@@ -102,25 +102,46 @@ export const update = async (req, res) => {
 }
 
 export const deleteCategory = async (req, res) => {
-    const { id } = req.params
+    const categoryId = req.params.id
 
     try {
-        const defaultCategory = await Category.findOne({ isDefault: true })
-        if (!defaultCategory) {
-            return res.status(500).send({ success: false, message: "Error: Categoría predeterminada no encontrada" })
-        }
-        if (id === defaultCategory._id.toString()) {
-            return res.status(400).send({ success: false, message: "No se puede eliminar la categoría predeterminada" })
-        }
-        const category = await Category.findById(id)
+        const category = await Category.findOne( {_id: categoryId} ); // Find the category by ID
+
         if (!category) {
-            return res.status(404).send({ success: false, message: "Categoría no encontrada" })
+            return res.status(404).send({
+                success: false,
+                message: "Category not found"
+            });
         }
-        await Product.updateMany({ category: id }, { category: defaultCategory._id })
-        await Category.findByIdAndDelete(id)
-        return res.send({ success: true, message: "Categoría eliminada y productos reasignados a la categoría predeterminada" })
-    } catch (err) {
-        console.error(err)
-        return res.status(500).send({ success: false, message: "Error al eliminar la categoría", err })
+
+        const defaultCategory = await Category.findOne({ name: 'Sin categoría' } )
+
+        if (!defaultCategory) {
+            return res.status(404).send({
+                success: false,
+                message: "Default category not found"
+            });
+        }
+
+        await category.deleteOne({ _id: defaultCategory.id });
+
+        await Product.updateMany(
+            { category: category.id },
+            { category: defaultCategory.id }
+              
+        );
+
+        return res.send({
+            success: true,
+            message: `Category '${category.name}' deleted and products reassigned to default category`
+        })
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({
+            success: false,
+            message: 'Error deleting category and updating products',
+            error: error.message
+        })
     }
 }

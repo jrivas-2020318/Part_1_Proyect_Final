@@ -13,6 +13,6 @@ api.post('/createCategory', [validateJwt, isAdmin, categoryValidator], save)
 
 api.put('/:id', [validateJwt, isAdmin, categoryUpdateValidator], update)
 
-api.delete('/:id', [validateJwt, isAdmin, categoryDeleteValidator], deleteCategory)
+api.delete('/:id', [validateJwt, isAdmin], deleteCategory)
 
 export default api
